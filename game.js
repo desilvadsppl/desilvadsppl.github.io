@@ -75,7 +75,7 @@ function update() {
     const scoreBoxHeight = 50;
 
     // Draw background box
-    ctx.fillStyle = "rgba(0, 0, 0, 0.7)"; // Semi-transparent background
+    ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // Semi-transparent background
     ctx.fillRect(10, 10, scoreBoxWidth, scoreBoxHeight);
 
     // Add rounded corners (optional)
