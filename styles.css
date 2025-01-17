@@ -83,10 +83,10 @@ body {
   justify-content: center;
   text-align: center;
   color: white;
-  margin-top: 60px;
   padding: 0 1rem;
   overflow: hidden; /* Ensure content doesn't overflow */
 }
+
 
 /* Other styles remain unchanged */
 .hero h1,
