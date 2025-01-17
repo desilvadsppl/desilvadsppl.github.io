@@ -87,18 +87,6 @@ body {
   overflow: hidden; /* Ensure content doesn't overflow */
 }
 
-.hero::before {
-  content: ''; /* Create a pseudo-element */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Adjust opacity with this value (0.5 = 50%) */
-  z-index: 1; /* Ensure it's behind the content */
-  pointer-events: none; /* Allow clicks to pass through this layer */
-}
-
 .hero h1,
 .hero p {
   position: relative; /* Bring content above the pseudo-element */
