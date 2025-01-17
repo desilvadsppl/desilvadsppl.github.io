@@ -4,7 +4,7 @@ body {
   font-family: Arial, sans-serif;
 
   /* Background image and styling */
-  background: url("img/Web_Background.jpg") no-repeat center center fixed;
+  background: url("img/background_test_desktop.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -55,8 +55,37 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+/* Scorecard Styling */
+.score-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
 
-/* Mobile-specific background */
+.score-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.score-card p {
+  font-size: 18px;
+}
+
+.score-card .score {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Mobile-specific background and responsiveness */
 @media (max-width: 768px) {
   body {
     background: url("img/Web_Background_mobile.jpg") no-repeat center center;
@@ -64,7 +93,24 @@ body {
   }
 
   .popup {
-    width: 60%;
+    width: 90%;
     padding: 15px;
+  }
+
+  .score-card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .score-card h2 {
+    font-size: 20px;
+  }
+
+  .score-card p {
+    font-size: 16px;
+  }
+
+  .score-card .score {
+    font-size: 28px;
   }
 }
