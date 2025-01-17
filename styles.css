@@ -48,7 +48,7 @@
 /* Mobile-specific background and responsiveness */
 @media (max-width: 768px) {
   body {
-    background: url("img/background_test_desktop.jpg") no-repeat center center;
+    background: url("img/mobile.jpg") no-repeat center center;
     background-size: cover; /* Ensure the mobile background fits */
   }
 
@@ -64,7 +64,7 @@
 .hero {
   position: relative; /* Set position relative for pseudo-element */
   background-image: url("img/background_test_desktop.jpg");
-  background-size: cover;
+  background-size: auto;
   background-position: center;
   background-repeat: no-repeat; /* Prevent background image from repeating */
   height: 100vh;
@@ -76,7 +76,6 @@
   padding: 0 1rem;
   overflow: hidden; /* Ensure content doesn't overflow */
 }
-
 
 /* Other styles remain unchanged */
 .hero a {
@@ -101,9 +100,6 @@
               0 0 30px rgba(255, 182, 193, 0.8);
   transform: scale(1.05);
 }
-
-
-/* Default Styles for Desktop (Already Provided) */
 
 /* Responsive Styles for Mobile */
 @media (max-width: 768px) {
