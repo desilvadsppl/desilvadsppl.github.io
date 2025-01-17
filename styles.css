@@ -59,7 +59,7 @@ body {
 /* Mobile-specific background */
 @media (max-width: 480px) {
   body {
-    background: url("img/Web_Background - mobile.jpg") no-repeat center center;
+    background: url("img/Web_Background_mobile") no-repeat center center;
     background-size: contain; /* Ensure the mobile background fits */
   }
 
