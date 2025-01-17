@@ -11,7 +11,7 @@ body {
 .popup {
   display: none;
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, 0);
   width: 80%;
@@ -95,6 +95,7 @@ body {
   .popup {
     width: 90%;
     padding: 15px;
+    top: 30%;
   }
 
   .score-card {

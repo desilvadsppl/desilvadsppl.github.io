@@ -68,10 +68,29 @@ function update() {
   if (Math.random() < 0.02) balls.push(createBall());
 
   // Display Score
-  ctx.fillStyle = "black";
-  ctx.font = "24px Arial";
-  ctx.fillText("Score: " + score, 10, 30);
 
+  function drawScore() {
+    const padding = 10;
+    const scoreBoxWidth = 150;
+    const scoreBoxHeight = 50;
+
+    // Draw background box
+    ctx.fillStyle = "rgba(0, 0, 0, 0.7)"; // Semi-transparent background
+    ctx.fillRect(10, 10, scoreBoxWidth, scoreBoxHeight);
+
+    // Add rounded corners (optional)
+    ctx.lineJoin = "round";
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.strokeRect(10, 10, scoreBoxWidth, scoreBoxHeight);
+
+    // Display the score text
+    ctx.fillStyle = "white";
+    ctx.font = "bold 24px 'Poppins', Arial, sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText("Score: " + score, 20 + padding, 35); // Adjust padding for alignment
+  }
   requestAnimationFrame(update);
 }
 
@@ -85,7 +104,7 @@ canvas.addEventListener("click", (e) => {
     }
   });
 
-  // Show popup after reaching 10 points
+  // Show popup after reaching 3 points
   if (score >= 3) {
     canvas.style.display = "none";
     popup.style.display = "block";
