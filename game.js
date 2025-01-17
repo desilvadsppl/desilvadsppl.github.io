@@ -8,6 +8,7 @@ canvas.height = window.innerHeight;
 let balls = [];
 let score = 0;
 
+// Function to create a new ball
 function createBall() {
   return {
     x: Math.random() * canvas.width,
@@ -18,6 +19,7 @@ function createBall() {
   };
 }
 
+// Function to draw a ball
 function drawBall(ball) {
   const colors = ["#FF5733", "#FFC300", "#3498DB", "#DAF7A6"];
 
@@ -53,8 +55,55 @@ function drawBall(ball) {
   ctx.closePath();
 }
 
+// Function to draw the scorecard
+function drawScoreCard() {
+  // Draw a scorecard background
+  ctx.fillStyle = "#282c34"; // Dark background color
+  ctx.fillRect(10, 10, 200, 50); // Position and size of the scorecard
+
+  // Add a border for the scorecard
+  ctx.strokeStyle = "#ffffff"; // White border color
+  ctx.lineWidth = 2;
+  ctx.strokeRect(10, 10, 200, 50);
+
+  // Add score text
+  ctx.fillStyle = "#ffffff"; // White text color
+  ctx.font = "20px Arial";
+  ctx.fillText("Score: " + score, 20, 40);
+
+  // Draw the progress strip
+  const barX = 10; // X position of the bar
+  const barY = 70; // Y position of the bar
+  const totalWidth = 200; // Total width of the progress bar
+  const barHeight = 10; // Height of the progress bar
+
+  // Draw the background bar
+  ctx.fillStyle = "#333333"; // Gray background
+  ctx.fillRect(barX, barY, totalWidth, barHeight);
+
+  // Draw the filled progress portion
+  const progressWidth = Math.min(score / 3, 1) * totalWidth; // Scale based on score
+  ctx.fillStyle = "#00ff00"; // Green color
+  ctx.fillRect(barX, barY, progressWidth, barHeight);
+
+  // Draw balls on top of the progress strip
+  const totalBalls = 3; // Number of balls
+  const ballSpacing = totalWidth / totalBalls; // Spacing between balls
+  for (let i = 0; i < totalBalls; i++) {
+    const ballX = barX + ballSpacing * i + ballSpacing / 2; // Center balls evenly
+    const ballY = barY - 10; // Position balls slightly above the strip
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, 8, 0, Math.PI * 2); // Ball size (radius = 8)
+    ctx.fillStyle = i < score ? "#ffcc00" : "#555555"; // Highlight based on score
+    ctx.fill();
+  }
+}
+
+// Function to update the game
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Update balls
   balls.forEach((ball, index) => {
     ball.y += ball.speed;
     drawBall(ball);
@@ -65,16 +114,16 @@ function update() {
     }
   });
 
+  // Create new balls randomly
   if (Math.random() < 0.02) balls.push(createBall());
 
-  // Display Score
-  ctx.fillStyle = "white";
-  ctx.font = "24px Arial";
-  ctx.fillText("Score: " + score, 10, 30);
+  // Draw the scorecard
+  drawScoreCard();
 
   requestAnimationFrame(update);
 }
 
+// Handle ball clicks
 canvas.addEventListener("click", (e) => {
   balls.forEach((ball, index) => {
     const dx = e.clientX - ball.x;
@@ -85,11 +134,12 @@ canvas.addEventListener("click", (e) => {
     }
   });
 
-  // Show popup after reaching 10 points
+  // Show popup after reaching 3 points
   if (score >= 3) {
     canvas.style.display = "none";
     popup.style.display = "block";
   }
 });
 
+// Start the game loop
 update();

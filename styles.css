@@ -1,12 +1,111 @@
+/* Hero Section */
+.hero {
+  position: relative; /* Set position relative for pseudo-element */
+  background-image: url("img/background_test_desktop.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Prevent background image from repeating */
+  height: 100vh;
+  width: 100vw; /* Full viewport width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 0 1rem;
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+/* Other styles remain unchanged */
+.hero a {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(45deg, #ff4dff, #ff0099, #ff66ff);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 
+              0 0 20px rgba(255, 105, 180, 0.8), 
+              0 0 30px rgba(255, 182, 193, 0.8);
+  transition: all 0.3s ease-in-out;
+  margin-top: 50%;
+}
+
+.hero a:hover {
+  background: linear-gradient(45deg, #ff66ff, #ff0099, #ff4dff);
+  box-shadow: 0 0 15px rgba(255, 20, 147, 0.8), 
+              0 0 30px rgba(255, 182, 193, 0.8);
+  transform: scale(1.05);
+}
+
+/* Reset body and html styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+  .hero {
+    height: 100vh;
+    padding: 1rem;
+    text-align: center;
+    background-image: url("img/mobile.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero a {
+    font-size: 1rem; /* Smaller font size for buttons */
+    padding: 0.5rem 1.5rem; /* Smaller padding for buttons */
+    border-radius: 20px; /* Adjust border radius for smaller buttons */
+    margin-top: auto; /* Adjusted to prevent overflow */
+  }
+}
+
+/* Responsive Styles for Extra Small Devices */
+@media (max-width: 480px) {
+  .hero {
+    padding: 0.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem; /* Even smaller font size for extra small devices */
+  }
+
+  .hero p {
+    font-size: 0.875rem;
+  }
+
+  .hero a {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    margin-top: auto; /* Adjusted to prevent overflow */
+  }
+}
+
+
+
+
 .popup {
   display: none;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
-  width: 80%;
-  max-width: 400px;
-  padding: 20px;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  max-width: 350px;
+  padding: 15px;
   text-align: center;
   border-radius: 10px;
   animation: rgbGlow 3s infinite;
@@ -14,6 +113,42 @@
   background-size: 300% 300%;
   animation: backgroundShift 6s infinite, rgbGlow 3s infinite;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Heading Styles */
+.popup h1 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Space between text and icons */
+  flex-wrap: wrap; /* Wrap if space is tight */
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif; /* Modern font style */
+}
+
+.popup .icon {
+  font-size: 1.8rem; /* Icon size */
+}
+
+/* Paragraph Styles */
+.popup p {
+  font-size: 1.2rem; /* Default font size for paragraphs */
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 10px 0;
+  font-family: 'Roboto', sans-serif; /* Elegant font style */
+}
+
+/* Date, Time, and Venue Styles */
+.popup p:nth-of-type(2) {
+  font-size: 1.4rem; /* Larger font size for date, time, and venue */
+  font-weight: bold;
+  color: #ffe600; /* Bright yellow for emphasis */
+  font-family: 'Montserrat', sans-serif; /* Stylish font for details */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add subtle text shadow */
 }
 
 @keyframes rgbGlow {
@@ -45,97 +180,51 @@
   100% { background-position: 0% 50%; }
 }
 
-/* Mobile-specific background and responsiveness */
-@media (max-width: 768px) {
-  body {
-    background: url("img/mobile.jpg") no-repeat center center;
-    background-size: cover; /* Ensure the mobile background fits */
-  }
-
-  .popup {
-    width: 90%;
-    padding: 15px;
-    top: 30%;
-  }
-}
-
-
-/* Hero Section */
-.hero {
-  position: relative; /* Set position relative for pseudo-element */
-  background-image: url("img/background_test_desktop.jpg");
-  background-size: auto;
-  background-position: center;
-  background-repeat: no-repeat; /* Prevent background image from repeating */
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  padding: 0 1rem;
-  overflow: hidden; /* Ensure content doesn't overflow */
-}
-
-/* Other styles remain unchanged */
-.hero a {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: white;
-  background: linear-gradient(45deg, #ff4dff, #ff0099, #ff66ff);
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 
-              0 0 20px rgba(255, 105, 180, 0.8), 
-              0 0 30px rgba(255, 182, 193, 0.8);
-  transition: all 0.3s ease-in-out;
-}
-
-.hero a:hover {
-  background: linear-gradient(45deg, #ff66ff, #ff0099, #ff4dff);
-  box-shadow: 0 0 15px rgba(255, 20, 147, 0.8), 
-              0 0 30px rgba(255, 182, 193, 0.8);
-  transform: scale(1.05);
-}
-
 /* Responsive Styles for Mobile */
 @media (max-width: 768px) {
-  .hero {
-    height: 100vh;
-    padding: 1rem;
-    text-align: center;
-    background-image: url("img/mobile.jpg");
-    background-position: center;
-    background-size: cover;
+  .popup {
+    padding: 10px 15px;
+    width: 70%; /* Increase popup width for small screens */
   }
 
-  .hero a {
-    font-size: 1rem; /* Smaller font size for buttons */
-    padding: 0.5rem 1.5rem; /* Smaller padding for buttons */
-    border-radius: 20px; /* Adjust border radius for smaller buttons */
+  .popup h1 {
+    font-size: 1.6rem; /* Slightly smaller font size for heading */
+    gap: 6px; /* Reduce gap for tighter spaces */
+  }
+
+  .popup .icon {
+    font-size: 1.6rem; /* Smaller icon size */
+  }
+
+  .popup p {
+    font-size: 1rem; /* Adjust paragraph size for smaller screens */
+  }
+
+  .popup p:nth-of-type(2) {
+    font-size: 1.2rem; /* Adjust detail font size for smaller screens */
   }
 }
 
 /* Responsive Styles for Extra Small Devices */
 @media (max-width: 480px) {
-  .hero {
-    padding: 0.5rem;
+  .popup {
+    padding: 8px 10px;
   }
 
-  .hero h1 {
-    font-size: 1.5rem; /* Even smaller font size for extra small devices */
+  .popup h1 {
+    font-size: 1.4rem;
+    gap: 4px; /* Further reduce gap */
   }
 
-  .hero p {
-    font-size: 0.875rem;
+  .popup .icon {
+    font-size: 1.4rem;
   }
 
-  .hero a {
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
+  .popup p {
+    font-size: 0.9rem;
+  }
+
+  .popup p:nth-of-type(2) {
+    font-size: 1.1rem; /* Further adjust detail font size */
   }
 }
-
