@@ -25,7 +25,7 @@
   
   @media (max-width: 480px) {
     body {
-      background: url("img/Web_Background - mobile.jpg") no-repeat center center;
+      background: url("img/Web_Background\ -\ mobile.jpg") no-repeat center center;
       background-size: cover;
     }
   
