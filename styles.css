@@ -73,7 +73,7 @@ body {
 /* Hero Section */
 .hero {
   position: relative; /* Set position relative for pseudo-element */
-  background-image: url('img/background_test_desktop.jpg');
+  background-image: url("img/background_test_desktop.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
