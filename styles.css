@@ -130,3 +130,55 @@ body {
   transform: scale(1.05);
 }
 
+
+/* Default Styles for Desktop (Already Provided) */
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+  .hero {
+    height: 100vh;
+    padding: 1rem;
+    text-align: center;
+    background-image: url("img/mobile.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .hero h1 {
+    font-size: 2rem; /* Smaller font size for mobile */
+    margin-bottom: 0.5rem;
+    -webkit-text-stroke: 0.5px #333; /* Adjust stroke width */
+  }
+
+  .hero p {
+    font-size: 1rem; /* Smaller font size for mobile */
+    margin-bottom: 1.5rem;
+  }
+
+  .hero a {
+    font-size: 1rem; /* Smaller font size for buttons */
+    padding: 0.5rem 1.5rem; /* Smaller padding for buttons */
+    border-radius: 20px; /* Adjust border radius for smaller buttons */
+  }
+}
+
+/* Responsive Styles for Extra Small Devices */
+@media (max-width: 480px) {
+  .hero {
+    padding: 0.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem; /* Even smaller font size for extra small devices */
+  }
+
+  .hero p {
+    font-size: 0.875rem;
+  }
+
+  .hero a {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
