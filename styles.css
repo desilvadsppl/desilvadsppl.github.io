@@ -71,66 +71,42 @@ body {
 
 
 /* Hero Section */
-.hero {
-  position: relative; /* Set position relative for pseudo-element */
-  background-image: url("img/background_test_desktop.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.hero a {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
   color: white;
-  margin-top: 60px;
-  padding: 0 1rem;
-  overflow: hidden; /* Ensure content doesn't overflow */
+  text-align: center;
+  background: linear-gradient(45deg, #ff4dff, #ff0099, #ff66ff);
+  border: 3px solid transparent;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 20px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 182, 193, 0.8);
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero::before {
-  content: ''; /* Create a pseudo-element */
+.hero a::before {
+  content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: -100%;
+  width: 300%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Adjust opacity with this value (0.5 = 50%) */
-  z-index: 1; /* Ensure it's behind the content */
-  pointer-events: none; /* Allow clicks to pass through this layer */
+  background: linear-gradient(45deg, #ff4dff, #ff0099, #ff66ff, #ff4dff);
+  z-index: 1;
+  transition: transform 0.5s;
 }
 
-.hero h1,
-.hero p {
-  position: relative; /* Bring content above the pseudo-element */
-  z-index: 2;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: white;
-  -webkit-text-stroke: 1px #333; /* Adds a white stroke */
-}
-
-.hero p {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.hero a {
-  background-color: #ff9900;
-  color: #333;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bolder;
-  transition: background-color 0.3s ease;
-  position: relative; /* Ensure link stays above the pseudo-element */
-  z-index: 2; /* Explicitly set the z-index for links */
+.hero a:hover::before {
+  transform: translateX(100%);
 }
 
 .hero a:hover {
-  background-color: #333;
-  color: #ffffff;
+  background: linear-gradient(45deg, #ff66ff, #ff0099, #ff4dff);
+  box-shadow: 0 0 15px rgba(255, 20, 147, 0.8), 0 0 30px rgba(255, 182, 193, 0.8);
 }
+
 
