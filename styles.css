@@ -76,6 +76,7 @@ body {
   background-image: url("img/background_test_desktop.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat; /* Prevent background image from repeating */
   height: 100vh;
   display: flex;
   align-items: center;
@@ -87,6 +88,7 @@ body {
   overflow: hidden; /* Ensure content doesn't overflow */
 }
 
+/* Other styles remain unchanged */
 .hero h1,
 .hero p {
   position: relative; /* Bring content above the pseudo-element */
