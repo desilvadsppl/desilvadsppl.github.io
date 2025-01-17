@@ -4,135 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AVR Beach Game</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: linear-gradient(to bottom, #87CEFA, #FFD700);
-      font-family: Arial, sans-serif;
-    }
-    canvas {
-      display: block;
-    }
-    #popup {
-      display: none;
-      position: absolute;
-      top: 20%;
-      left: 20%;
-      width: 60%;
-      padding: 20px;
-      background: white;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="gameCanvas"></canvas>
-  <div id="popup">
+  <canvas id="beachGameCanvas"></canvas>
+  <div id="gamePopup" class="popup">
     <h2>🎉 You've Unlocked the Invitation! 🎉</h2>
     <p>Join us at the AVR Beach Party!</p>
     <p>Date: February 10, 2025<br>Time: 6 PM<br>Location: Sandy Shores Beach</p>
   </div>
-
-  <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-    const popup = document.getElementById("popup");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let balls = [];
-    let score = 0;
-
-    function createBall() {
-      return {
-        x: Math.random() * canvas.width,
-        y: 0,
-        radius: 20,
-        speed: 2 + Math.random() * 2,
-        color: "#" + Math.floor(Math.random() * 16777215).toString(16)
-      };
-    }
-
-    function drawBall(ball) {
-        const colors = ["#FF5733", "#FFC300", "#3498DB", "#DAF7A6"]; // Beach ball colors
-
-        // Draw the white base
-        ctx.beginPath();
-        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#FFFFFF"; // White base
-        ctx.fill();
-        ctx.closePath();
-
-        // Draw the colored segments
-        const segmentCount = 4; // Number of segments
-        for (let i = 0; i < segmentCount; i++) {
-            ctx.beginPath();
-            ctx.moveTo(ball.x, ball.y);
-            ctx.arc(
-            ball.x,
-            ball.y,
-            ball.radius,
-            (i * Math.PI) / 2, // Start angle for each segment
-            ((i + 1) * Math.PI) / 2 // End angle for each segment
-            );
-            ctx.fillStyle = colors[i % colors.length];
-            ctx.fill();
-            ctx.closePath();
-        }
-
-  // Draw the center circle (for realism)
-  ctx.beginPath();
-  ctx.arc(ball.x, ball.y, ball.radius * 0.3, 0, Math.PI * 2);
-  ctx.fillStyle = "#FFFFFF"; // White center
-  ctx.fill();
-  ctx.closePath();
-}
-
-
-    function update() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      balls.forEach((ball, index) => {
-        ball.y += ball.speed;
-        drawBall(ball);
-
-        // Remove balls that fall out of the screen
-        if (ball.y - ball.radius > canvas.height) {
-          balls.splice(index, 1);
-        }
-      });
-
-      if (Math.random() < 0.02) balls.push(createBall());
-
-      // Display Score
-      ctx.fillStyle = "black";
-      ctx.font = "24px Arial";
-      ctx.fillText("Score: " + score, 10, 30);
-
-      requestAnimationFrame(update);
-    }
-
-    canvas.addEventListener("click", (e) => {
-      balls.forEach((ball, index) => {
-        const dx = e.clientX - ball.x;
-        const dy = e.clientY - ball.y;
-        if (Math.sqrt(dx * dx + dy * dy) < ball.radius) {
-          balls.splice(index, 1);
-          score++;
-        }
-      });
-
-      // Show popup after reaching 10 points
-      if (score >= 1) {
-        canvas.style.display = "none";
-        popup.style.display = "block";
-      }
-    });
-
-    update();
-  </script>
+  <script src="game.js"></script>
 </body>
 </html>

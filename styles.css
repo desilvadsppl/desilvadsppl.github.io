@@ -1,0 +1,37 @@
+  body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+
+    /* Background image and styling */
+    background: url("img/Web_Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .popup {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      background: url("img/Web_Background - mobile.jpg") no-repeat center center;
+      background-size: cover;
+    }
+  
+    .popup {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+  
