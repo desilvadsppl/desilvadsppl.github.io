@@ -59,8 +59,8 @@ body {
 /* Mobile-specific background */
 @media (max-width: 768px) {
   body {
-    background: url("img/Web_Background_mobile.jpg") no-repeat center center;
-    background-size: initial; /* Ensure the mobile background fits */
+    background: url("img/Web_Background - mobile.jpg") no-repeat center center;
+    background-size: contain; /* Ensure the mobile background fits */
   }
 
   .popup {
