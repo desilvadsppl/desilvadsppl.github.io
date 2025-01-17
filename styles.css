@@ -1,13 +1,3 @@
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-
-  /* Background image and styling */
-  background: url("img/background_test_desktop.jpg") no-repeat center center fixed;
-  background-size: cover;
-}
-
 .popup {
   display: none;
   position: absolute;
@@ -58,7 +48,7 @@ body {
 /* Mobile-specific background and responsiveness */
 @media (max-width: 768px) {
   body {
-    background: url("img/Web_Background_mobile.jpg") no-repeat center center;
+    background: url("img/background_test_desktop.jpg") no-repeat center center;
     background-size: cover; /* Ensure the mobile background fits */
   }
 
@@ -73,7 +63,7 @@ body {
 /* Hero Section */
 .hero {
   position: relative; /* Set position relative for pseudo-element */
-  background-image: url("img/background_test_desktop.jpg");
+  background-image: url("img/mobile.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; /* Prevent background image from repeating */
