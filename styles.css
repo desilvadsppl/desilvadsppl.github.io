@@ -17,11 +17,13 @@ body {
   width: 80%;
   max-width: 400px;
   padding: 20px;
-  background: white;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   animation: rgbGlow 3s infinite;
+  background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+  background-size: 300% 300%;
+  animation: backgroundShift 6s infinite, rgbGlow 3s infinite;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes rgbGlow {
@@ -45,6 +47,12 @@ body {
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.8),
       0 0 30px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.8);
   }
+}
+
+@keyframes backgroundShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 
