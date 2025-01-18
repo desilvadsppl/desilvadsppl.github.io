@@ -1,3 +1,12 @@
+// Preload audio files
+const hoverSound = new Audio("sounds/hover.mp3");
+const clickSound = new Audio("sounds/click.mp3");
+const startGameSound = new Audio("sounds/start-game.mp3");
+const selectBallSound = new Audio("sounds/select-ball.mp3");
+const gameOverSound = new Audio("sounds/game-over.mp3");
+
+
+// Reference to the canvas and popup
 const canvas = document.getElementById("beachGameCanvas");
 const ctx = canvas.getContext("2d");
 const popup = document.getElementById("gamePopup");
@@ -131,6 +140,7 @@ canvas.addEventListener("click", (e) => {
     if (Math.sqrt(dx * dx + dy * dy) < ball.radius) {
       balls.splice(index, 1);
       score++;
+      selectBallSound.play(); // Play ball selection sound
     }
   });
 
@@ -138,8 +148,10 @@ canvas.addEventListener("click", (e) => {
   if (score >= 3) {
     canvas.style.display = "none";
     popup.style.display = "block";
+    gameOverSound.play(); // Play game over sound
   }
 });
 
 // Start the game loop
+startGameSound.play(); // Play sound when game starts
 update();
