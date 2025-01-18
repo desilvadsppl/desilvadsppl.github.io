@@ -4,6 +4,7 @@ const clickSound = new Audio("sounds/click.mp3");
 const startGameSound = new Audio("sounds/start-game.mp3");
 const selectBallSound = new Audio("sounds/select-ball.mp3");
 const gameOverSound = new Audio("sounds/game-over.mp3");
+const partySound = new Audio("sounds/party.mp3");
 
 // Reference to the canvas and popup
 const canvas = document.getElementById("beachGameCanvas");
@@ -147,11 +148,29 @@ canvas.addEventListener("click", (e) => {
   });
 
   // Show popup after reaching 3 points
+  // Show popup after reaching 3 points
   if (score >= 3) {
     canvas.style.display = "none";
     popup.style.display = "block";
-    gameOverSound.play(); // Play game over sound
-  }
+
+    // Play the game over sound
+    gameOverSound.play();
+
+    // Stop the startGameSound
+    startGameSound.pause();
+    startGameSound.currentTime = 0; // Reset the sound to the start
+
+    // Delay starting the party sound by 3 seconds
+    setTimeout(() => {
+        partySound.play();
+    }, 3000); // 3000 milliseconds = 3 seconds
+}
+
+
+
+  
+
+
 });
 
 // Start the game loop
