@@ -5,7 +5,6 @@ const startGameSound = new Audio("sounds/start-game.mp3");
 const selectBallSound = new Audio("sounds/select-ball.mp3");
 const gameOverSound = new Audio("sounds/game-over.mp3");
 
-
 // Reference to the canvas and popup
 const canvas = document.getElementById("beachGameCanvas");
 const ctx = canvas.getContext("2d");
@@ -17,13 +16,16 @@ canvas.height = window.innerHeight;
 let balls = [];
 let score = 0;
 
+// Check if the device is mobile
+const isMobile = window.innerWidth <= 768;
+
 // Function to create a new ball
 function createBall() {
   return {
     x: Math.random() * canvas.width,
     y: 0,
-    radius: 40,
-    speed: 2 + Math.random() * 2,
+    radius: isMobile ? 30 : 40, // Slightly smaller radius for mobile
+    speed: isMobile ? 2 + Math.random() * 1.5 : 2 + Math.random() * 2, // Adjusted speed for mobile
     color: "#" + Math.floor(Math.random() * 16777215).toString(16),
   };
 }
@@ -68,22 +70,22 @@ function drawBall(ball) {
 function drawScoreCard() {
   // Draw a scorecard background
   ctx.fillStyle = "#282c34"; // Dark background color
-  ctx.fillRect(10, 10, 200, 50); // Position and size of the scorecard
+  ctx.fillRect(10, 10, isMobile ? 150 : 200, 50); // Adjusted width for mobile
 
   // Add a border for the scorecard
   ctx.strokeStyle = "#ffffff"; // White border color
   ctx.lineWidth = 2;
-  ctx.strokeRect(10, 10, 200, 50);
+  ctx.strokeRect(10, 10, isMobile ? 150 : 200, 50);
 
   // Add score text
   ctx.fillStyle = "#ffffff"; // White text color
-  ctx.font = "20px Arial";
+  ctx.font = isMobile ? "16px Arial" : "20px Arial"; // Smaller font on mobile
   ctx.fillText("Score: " + score, 20, 40);
 
   // Draw the progress strip
   const barX = 10; // X position of the bar
   const barY = 70; // Y position of the bar
-  const totalWidth = 200; // Total width of the progress bar
+  const totalWidth = isMobile ? 150 : 200; // Adjusted for mobile
   const barHeight = 10; // Height of the progress bar
 
   // Draw the background bar
@@ -102,7 +104,7 @@ function drawScoreCard() {
     const ballX = barX + ballSpacing * i + ballSpacing / 2; // Center balls evenly
     const ballY = barY - 10; // Position balls slightly above the strip
     ctx.beginPath();
-    ctx.arc(ballX, ballY, 8, 0, Math.PI * 2); // Ball size (radius = 8)
+    ctx.arc(ballX, ballY, isMobile ? 6 : 8, 0, Math.PI * 2); // Adjusted ball size for mobile
     ctx.fillStyle = i < score ? "#ffcc00" : "#555555"; // Highlight based on score
     ctx.fill();
   }

@@ -8,31 +8,21 @@
 </head>
 <body class="hero">
     <div>
-        <!-- Add the game-button class to the link -->
         <a href="dashboard.html" id="detailsButton" class="game-button">Click here for details</a>
     </div>
 
     <script>
-        // Preload the sound files
-        const hoverSound = new Audio("../sounds/hover.mp3");
-        const clickSound = new Audio("../sounds/click.mp3");
+        const hoverSound = new Audio("sounds/hover.mp3");
+        const clickSound = new Audio("sounds/click.mp3");
 
-        // Get the details button
+        document.body.addEventListener('click', () => {
+            hoverSound.play().catch(() => {});
+            clickSound.play().catch(() => {});
+        }, { once: true });
+
         const detailsButton = document.getElementById("detailsButton");
-
-        // Add hover sound to the details button
-        detailsButton.addEventListener("mouseenter", () => {
-            console.log('Hover event triggered'); // Debug log
-            hoverSound.play();
-        });
-
-        // Add click sound to the details button
-        detailsButton.addEventListener("click", () => {
-            console.log('Click event triggered'); // Debug log
-            clickSound.play();
-        });
+        detailsButton.addEventListener("mouseenter", () => hoverSound.play());
+        detailsButton.addEventListener("click", () => clickSound.play());
     </script>
-
-    <script src="game.js"></script>
 </body>
 </html>
