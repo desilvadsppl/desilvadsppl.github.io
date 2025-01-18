@@ -63,6 +63,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Prevent scrolling */
   }
 
   .hero a {
