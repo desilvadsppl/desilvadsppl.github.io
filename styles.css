@@ -63,7 +63,10 @@ html, body {
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Prevent scrolling */
-    padding: 1rem;
+    padding: 0; /* Ensure no padding shifts the background */
+    margin: 0; /* Remove any default margin */
+    width: 100%; /* Full width to ensure proper alignment */
+    box-sizing: border-box; /* Include padding in height/width calculation */
   }
 
   .hero a {
