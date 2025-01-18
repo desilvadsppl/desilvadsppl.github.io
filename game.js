@@ -14,7 +14,7 @@ function createBall() {
     x: Math.random() * canvas.width,
     y: 0,
     radius: 40,
-    speed: 1 + Math.random() * 1,
+    speed: 2 + Math.random() * 2,
     color: "#" + Math.floor(Math.random() * 16777215).toString(16),
   };
 }
