@@ -63,6 +63,7 @@ html, body {
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Prevent scrolling */
+    padding: 1rem;
   }
 
   .hero a {
