@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<!-- 
+    This is a property of Ashfaq Khajudeen 
+ -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <link rel="shortcut icon" href="/assets/components/fav.png" type="image/x-icon">
+    <title>Port City Aurudu Game</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mali:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+    </style>
+
+    <style type="text/css">
+        body {
+            overflow: hidden;
+
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px
+        }
+
+        ::-webkit-scrollbar-button {
+            background: #ccc
+        }
+
+        ::-webkit-scrollbar-track-piece {
+            background: #ccc
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgb(255, 153, 0)
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+            align-content: center;
+            margin: auto;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body class="center">
+    <div id="game-container"></div>
+
+    <!-- Load all scripts first -->
+    <script type="text/javascript" src="js/phaser.min.js"></script>
+    <script type="text/javascript" src="js/boot.js"></script>
+    <script type="text/javascript" src="js/preload.js"></script>
+    <script type="text/javascript" src="js/mainMenu.js"></script>
+    <script type="text/javascript" src="js/game1.js"></script>
+    <script type="text/javascript" src="js/game2.js"></script>
+    <script type="text/javascript" src="js/game3.js"></script>
+    <script type="text/javascript" src="js/gameOver1.js"></script>
+    <script type="text/javascript" src="js/gameOver2.js"></script>
+    <script type="text/javascript" src="js/gameOver3.js"></script>
+    <script type="text/javascript" src="js/gameStart1.js"></script>
+    <script type="text/javascript" src="js/gameStart2.js"></script>
+    <script type="text/javascript" src="js/gameStart3.js"></script>
+
+    <!-- Initialize game after scripts are loaded -->
+    <script type="text/javascript">
+        (function () {
+            game = new Phaser.Game({
+            width: 1080,
+            height: 1920,
+            renderer: Phaser.CANVAS,
+            canvas: document.createElement('canvas', { willReadFrequently: true }),
+            // other config options...
+        });
+            //Add all states
+            game.state.add("Boot", Boot);
+            game.state.add("Preload", Preload);
+            game.state.add("MainMenu", MainMenu);
+            game.state.add("GameOver1", GameOver1);
+            game.state.add("GameOver2", GameOver2);
+            game.state.add("GameOver3", GameOver3);
+            game.state.add("Game1", Game1);
+            game.state.add("Game3", Game3);
+            game.state.add("Game2", Game2);
+            game.state.add("StartGame1", StartGame1);
+            game.state.add("StartGame3", StartGame3);
+            game.state.add("StartGame2", StartGame2);
+            
+            //Start the first state
+            game.state.start("Boot");
+        })();
+    </script>
+</body>
+
+</html>
