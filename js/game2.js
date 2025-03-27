@@ -29,9 +29,9 @@ Game2.prototype = {
         bg_t.y = 80;
         this.progress.y = 80;
 
+        // Chalk tries indicator
         this.chalks = this.game.add.group();
         this.chalks.createMultiple(3, 'chalk');
-
         this.chalks.children[0].reset(this.game.world.centerX - 100, bg_t.position.y + 50);
         this.chalks.children[1].reset(this.game.world.centerX, bg_t.position.y + 50);
         this.chalks.children[2].reset(this.game.world.centerX + 100, bg_t.position.y + 50);
@@ -108,15 +108,22 @@ Game2.prototype = {
     },
 
     setEyeMark: function (e) {
-        const x = parseFloat(e.input._pointerData[0].x);
-        const y = parseFloat(e.input._pointerData[0].y);
+        // Get touch position relative to the board
+        var localX = pointer.x - board.x;
+        var localY = pointer.y - board.y;
+        
+        // Adjust for board scale
+        localX /= board.scale.x;
+        localY /= board.scale.y;
+        
+        // Define target area (adjust these values as needed)
+        const e_x_1 = (board.width / 4.3333);
+        const e_x_2 = (board.width / 3.5777);
+        const e_y_1 = (board.height / 3.5094);
+        const e_y_2 = (board.height / 2.8181);
 
-        const e_x_1 = (this.board.width / 4.3333);
-        const e_x_2 = (this.board.width / 3.5777);
-        const e_y_1 = (this.board.height / 3.5094);
-        const e_y_2 = (this.board.height / 2.8181);
-
-        if ((x > e_x_1 && x < e_x_2) && (y > e_y_1 && y < e_y_2) && this.alive) {
+        // Check if touch is within target area
+        if ((localX > e_x_1 && localX < e_x_2) && (localY > e_y_1 && localY < e_y_2) && this.alive) {
             this.mark.play();
             this.boardShake_y.pause();
             this.boardShake_x.pause();
@@ -128,15 +135,19 @@ Game2.prototype = {
                 this.gameOver();
             }, 200);
 
-            this.add.tileSprite(e.position.x + e_x_1 + 5, e.position.y + e_y_1 + 10, 29, 17, "eye");
+            // Visual feedback for correct touch
+            var eye = this.add.tileSprite(board.x + e_x_1 + 5, board.y + e_y_1 + 10, 29, 17, "eye");
+            eye.scale.setTo(board.scale.x, board.scale.y);
         }
         else {
             if (this.alive) {
                 this.mark.play();
                 this.boardShake_y.resume();
                 this.boardShake_x.resume();
-                cross = this.game.add.sprite((e.position.x + x) - 15, (e.position.y + y) - 15, 'cross');
-                cross.scale.setTo(2);
+                
+                // Visual feedback for incorrect touch
+                var cross = this.game.add.sprite(pointer.x - 15, pointer.y - 15, 'cross');
+                cross.scale.setTo(2 * (this.game.width / 800)); // Scale based on screen size
                 cross.animations.add('initiate', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, false);
                 cross.play('initiate');
             }
