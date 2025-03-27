@@ -21,14 +21,14 @@ MainMenu.prototype = {
         game.add.image(0, 0, 'menu').scale.setTo(1.02, 1.02);
         /*game.add.image(0, 0, 'points-style').scale.setTo(1.02, 1.02);*/
 
-        var sun = game.add.sprite(this.game.world.width - 300, -20, 'sun');
+        /*var sun = game.add.sprite(this.game.world.width - 300, -20, 'sun');
         sun.animations.add('shine', [0, 1, 2, 3], 2, true);
         sun.play('shine');
         sun.scale.setTo(0.6, 0.6);
 
         var bird = game.add.sprite(-15, -20, 'bird');
         bird.animations.add('crow', [0, 1, 2, 3], 3, true);
-        bird.play('crow');
+        bird.play('crow');*/
 
         /*game.add.image(0, 0, 'menu-fix').scale.setTo(1.02, 1.02);
         game.add.image(this.game.world.centerX - 150, 70, 'logo').scale.setTo(0.7, 0.7);*/

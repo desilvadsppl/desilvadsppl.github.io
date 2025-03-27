@@ -21,15 +21,15 @@ Game3.prototype = {
         this.bgm.volume = 0.5;
 
         // Background setup
-        var bg = game.add.image(0, -30, "bg-3");
+        var bg = game.add.image(0, 0, "bg-3");
         game.add.tween(bg).to({ y: 0 }, 745, "Sine.easeInOut", true, 0, -1, true);
         this.game.stage.backgroundColor = 'ffe8a3';
 
         // Timer progress bar setup
         this.perc = 1000;
         this.percx = (this.game.world.width - 1000) / 2;
-        this.progressBg = game.add.image(this.percx, 80, "timeline-bg");
-        this.progress = game.add.image(this.percx, 80, "timeline");
+        this.progressBg = game.add.image(this.percx, 280, "timeline-bg");
+        this.progress = game.add.image(this.percx, 280, "timeline");
         
         // Game elements setup
         this.pitWidth = this.game.cache.getImage('tree').width;
@@ -48,7 +48,7 @@ Game3.prototype = {
         this.game.world.bringToTop(this.floor);
 
         // UI setup
-        this.sccorePanel = this.add.sprite(10, 10, "top-score-panel");
+        this.sccorePanel = this.add.sprite(10, 150, "top-score-panel");
         this.createScore();
         this.addButtons();
 
@@ -145,16 +145,16 @@ Game3.prototype = {
     },
 
     addButtons: function () {
-        game.add.button(20, 100, 'btn_home',
+        game.add.button(20, 250, 'btn_home',
             () => {
                 this.stopSounds(); 
                 this.click.play(); 
                 this.game.state.start('MainMenu');
             }, this, 1, 2);
 
-        this.mute = game.add.button(20, 200, 'btn_mute', this.soundIt, this, 1, 0);
+        this.mute = game.add.button(20, 350, 'btn_mute', this.soundIt, this, 1, 0);
         this.mute.visible = false;
-        this.sound = game.add.button(20, 200, 'btn_sound', this.muteIt, this, 1, 0);
+        this.sound = game.add.button(20, 350, 'btn_sound', this.muteIt, this, 1, 0);
     },
 
     muteIt: function () {
@@ -228,15 +228,15 @@ Game3.prototype = {
         this.player.animations.add('climb-left', [5, 6, 7, 8, 9], 5, true);
         this.player.play('climb-right');
         this.player.body.setSize(50, 100);
-        this.player.y = this.game.world.height - 320;
+        this.player.y = this.game.world.height - 900;
         this.player.body.offset.x = 105;
         this.player.body.offset.y = 70;
     },
 
     createScore: function () {
         var scoreFont = "50px Mali";
-        this.scoreLabel = this.game.add.text(300, 55, "0", { font: scoreFont, fill: "#000" });
-        this.game.add.text(150, 55, "ft", { font: scoreFont, fill: "#000" }).anchor.setTo(0.5, 0.5);
+        this.scoreLabel = this.game.add.text(300, 200, "0", { font: scoreFont, fill: "#000" });
+        this.game.add.text(150, 200, "ft", { font: scoreFont, fill: "#000" }).anchor.setTo(0.5, 0.5);
         this.scoreLabel.anchor.setTo(0.5, 0.5);
         this.scoreLabel.align = 'center';
         this.game.world.bringToTop(this.scoreLabel);
