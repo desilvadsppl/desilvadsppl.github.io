@@ -68,7 +68,7 @@ MainMenu.prototype = {
 
         game.add.button(
             game.world.centerX - 490, 
-            buttonYStart + 85 + buttonSpacing, // Add consistent spacing
+            buttonYStart - 250 + buttonSpacing, // Add consistent spacing
             'btn_elephant', 
             this.startGame2, 
             this, 
@@ -77,7 +77,7 @@ MainMenu.prototype = {
 
         game.add.button(
             game.world.centerX - 490, 
-            buttonYStart + 85 + (buttonSpacing * 2), // Double spacing for third button
+            buttonYStart - 190 + (buttonSpacing * 2), // Double spacing for third button
             'btn_grease', 
             this.startGame3, 
             this, 
