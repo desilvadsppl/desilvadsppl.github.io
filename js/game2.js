@@ -108,66 +108,57 @@ Game2.prototype = {
     },
 
     setEyeMark: function (e) {
-        // Get touch position relative to the board
-        var localX = pointer.x - board.x;
-        var localY = pointer.y - board.y;
-        
-        // Adjust for board scale
-        localX /= board.scale.x;
-        localY /= board.scale.y;
-        
-        // Define target area (adjust these values as needed)
-        const e_x_1 = (board.width / 4.3333);
-        const e_x_2 = (board.width / 3.5777);
-        const e_y_1 = (board.height / 3.5094);
-        const e_y_2 = (board.height / 2.8181);
+    // Get touch/mouse position using normalized coordinates
+    const x = this.game.input.activePointer.worldX;
+    const y = this.game.input.activePointer.worldY;
 
-        // Check if touch is within target area
-        if ((localX > e_x_1 && localX < e_x_2) && (localY > e_y_1 && localY < e_y_2) && this.alive) {
+    // Normalize values based on screen width and height
+    const e_x_1 = (this.board.width / 4.3333);
+    const e_x_2 = (this.board.width / 3.5777);
+    const e_y_1 = (this.board.height / 3.5094);
+    const e_y_2 = (this.board.height / 2.8181);
+
+    if ((x > e_x_1 && x < e_x_2) && (y > e_y_1 && y < e_y_2) && this.alive) {
+        this.mark.play();
+        this.boardShake_y.pause();
+        this.boardShake_x.pause();
+        this.blinder.play('shrink');
+
+        setTimeout(() => {
+            this.blinder.visible = false;
+            score = this.perc;
+            this.gameOver();
+        }, 200);
+
+        this.add.tileSprite(x + e_x_1 + 5, y + e_y_1 + 10, 29, 17, "eye");
+    } else {
+        if (this.alive) {
             this.mark.play();
-            this.boardShake_y.pause();
-            this.boardShake_x.pause();
-            this.blinder.play('shrink');
+            this.boardShake_y.resume();
+            this.boardShake_x.resume();
+            const cross = this.game.add.sprite(x - 15, y - 15, 'cross');
+            cross.scale.setTo(2);
+            cross.animations.add('initiate', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, false);
+            cross.play('initiate');
+        }
+        tries--;
 
+        if (!(tries < 0) && this.alive) {
+            this.chalks.children[tries].alpha = 0.40;
+        }
+
+        if (tries === 0) {
+            this.alive = false;
+            this.blinder.play('shrink');
+            this.boardShake_x.pause();
+            this.boardShake_y.pause();
             setTimeout(() => {
                 this.blinder.visible = false;
-                score = this.perc;
                 this.gameOver();
-            }, 200);
-
-            // Visual feedback for correct touch
-            var eye = this.add.tileSprite(board.x + e_x_1 + 5, board.y + e_y_1 + 10, 29, 17, "eye");
-            eye.scale.setTo(board.scale.x, board.scale.y);
+            }, 240);
         }
-        else {
-            if (this.alive) {
-                this.mark.play();
-                this.boardShake_y.resume();
-                this.boardShake_x.resume();
-                
-                // Visual feedback for incorrect touch
-                var cross = this.game.add.sprite(pointer.x - 15, pointer.y - 15, 'cross');
-                cross.scale.setTo(2 * (this.game.width / 800)); // Scale based on screen size
-                cross.animations.add('initiate', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, false);
-                cross.play('initiate');
-            }
-            tries--;
-
-            if (!(tries < 0) && this.alive)
-                this.chalks.children[tries].alpha = .40;
-
-            if (tries == 0) {
-                this.alive = false;
-                this.blinder.play('shrink');
-                this.boardShake_x.pause();
-                this.boardShake_y.pause();
-                setTimeout(() => {
-                    this.blinder.visible = false;
-                    this.gameOver();
-                }, 240);
-            }
-        }
-    },
+    }
+},
 
     createBlinder: function () {
         this.blinder = this.game.add.sprite(-(this.game.world.centerX / 8), this.game.world.centerY / 2, 'blind_fold');
