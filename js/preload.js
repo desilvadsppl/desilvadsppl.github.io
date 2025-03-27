@@ -32,11 +32,9 @@ Preload.prototype = {
 		this.game.load.spritesheet('btn_exit', '/assets/components/btn-exit.png', 107.5, 104);
 
 		this.game.load.image('menu', '/assets/images/bg/menu-screen.png');
-		this.game.load.image('menu-fix', '/assets/images/bg/menu-fix.png');
-		this.game.load.image('points-style', '/assets/images/bg/points-style.png');
+	
 
 		this.game.load.image('top-score-panel', 'assets/components/top-score-panel.png');
-		this.game.load.image('popup', '/assets/images/bg/start.png');
 
 		this.game.load.image('tree', 'assets/components/grease_tree.png');
 		this.game.load.image('rock-1', '/assets/components/rock-1.png');
@@ -54,7 +52,6 @@ Preload.prototype = {
 		this.game.load.image('timeline', '/assets/components/timeline.png');
 		this.game.load.image('timeline-bg', '/assets/components/timeline-bg.png');
 		this.game.load.image('eye', '/assets/components/eye.png',);
-		this.game.load.spritesheet('iman', '/assets/components/iman_59x153.png', 58.16, 152.33);
 		this.game.load.spritesheet('blind_fold', 'assets/components/blind_fold.png', 800, 235);
 		this.game.load.spritesheet('cross', '/assets/components/cross.png', 18, 19);
 
