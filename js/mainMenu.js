@@ -65,14 +65,6 @@ MainMenu.prototype = {
         var buttonYStart = this.game.world.height / 2.75;
         var buttonSpacing = 300; // Increased spacing between buttons
 
-        game.add.button(
-            game.world.centerX - 490, // Adjusted for scale 3 and centering (130*3 = 390, 390/2 = 195)
-            buttonYStart + 85, 
-            'btn_obstacle', 
-            this.startGame1, 
-            this, 
-            1, 0, 0
-        ).scale.setTo(3);
 
         game.add.button(
             game.world.centerX - 490, 
@@ -134,7 +126,6 @@ MainMenu.prototype = {
         this.bgm.pause();
     },
 
-    startGame1: function () { this.cxx(); this.game.state.start("StartGame1"); },
     startGame2: function () { this.cxx(); this.game.state.start("StartGame2"); },
     startGame3: function () { this.cxx(); this.game.state.start("StartGame3"); }
 };
