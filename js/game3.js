@@ -87,7 +87,7 @@ Game3.prototype = {
 
             // End game if time runs out
             if (remaining <= 0) {
-                this.gameOver();
+                this.gameWon();
             }
         }
     },
@@ -260,5 +260,13 @@ Game3.prototype = {
             this.bgm.pause();
             this.game.state.start('GameOver3');
         }, 200);
+    },
+
+    gameWon: function () {
+        this.alive = false;
+        this.stopSounds();
+        setTimeout(() => {
+            this.game.state.start('GameWon');
+        }, 1500);
     }
 };

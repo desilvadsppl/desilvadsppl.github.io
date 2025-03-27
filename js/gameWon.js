@@ -1,0 +1,64 @@
+var GameWon = function (game) { };
+
+GameWon.prototype = {
+
+	create: function () {
+
+		this.game.stage.backgroundColor = '479cde';
+
+		game.add.image(0, 0, "game-won2");
+
+		this.click = game.add.audio('click'); 
+
+		this.showScore();
+	},
+
+	showScore: function () {
+
+		game.add.button(game.world.centerX - 200, 1340, 'btn_home', function () {
+			this.click.play(); 
+			this.game.state.start('MainMenu');
+		}, this, 1, 0);
+		game.add.button(game.world.centerX + 100, 1340, 'btn_play', function () {
+			this.click.play(); 
+			this.restartGame3();
+		}, this, 1, 0);
+
+		var scoreFont = "70px Mali";
+
+		this.scoreLabel = this.game.add.text(630, 1040, "0", { font: scoreFont, fill: "#332F26" });
+		this.scoreLabel.anchor.setTo(0.5, 0.5);
+		this.scoreLabel.align = 'left';
+		this.game.world.bringToTop(this.scoreLabel);
+		this.scoreLabel.text = (score);
+
+		this.highScore = this.game.add.text(630, 1140, "0", { font: scoreFont, fill: "#332F26" });
+		this.highScore.anchor.setTo(0.5, 0.5);
+		this.highScore.align = 'left';
+		this.game.world.bringToTop(this.highScore);
+
+		this.hs = window.localStorage.getItem("game_2");
+
+		if (this.hs == null || this.hs == "Nan") {
+			this.highScore.setText(score);
+			window.localStorage.setItem("game_2", score)
+		}
+		else if (parseInt(this.hs) < score) {
+			this.highScore.setText((score));
+			window.localStorage.setItem("game_2", score)
+
+		}
+		else {
+			this.highScore.setText(this.hs);
+		}
+
+	},
+
+	restartGame: function () {
+		this.game.state.start("Game2");
+	},
+	restartGame3: function () {
+		this.game.state.start("Game3");
+	}
+
+}

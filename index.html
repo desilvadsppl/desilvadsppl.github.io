@@ -79,6 +79,8 @@
     <script type="text/javascript" src="js/gameOver3.js"></script>
     <script type="text/javascript" src="js/gameStart2.js"></script>
     <script type="text/javascript" src="js/gameStart3.js"></script>
+    <script type="text/javascript" src="js/gameWon.js"></script>
+  
 
     <!-- Initialize game after scripts are loaded -->
     <script type="text/javascript">
@@ -100,6 +102,7 @@
             game.state.add("Game2", Game2);
             game.state.add("StartGame3", StartGame3);
             game.state.add("StartGame2", StartGame2);
+            game.state.add('GameWon', GameWon);
             
             //Start the first state
             game.state.start("Boot");

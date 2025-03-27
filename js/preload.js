@@ -66,6 +66,7 @@ Preload.prototype = {
 		// Game Over
 
 		this.game.load.image('game-over', '/assets/images/bg/Game-over-screen.png');
+		this.game.load.image('game-won2', '/assets/images/bg/game-win2.png');
 
 	},
 
