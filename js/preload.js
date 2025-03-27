@@ -41,7 +41,6 @@ Preload.prototype = {
 		this.game.load.image('tree', 'assets/components/grease_tree.png');
 		this.game.load.image('rock-1', '/assets/components/rock-1.png');
 		this.game.load.image('rock-2', '/assets/components/rock-2.png');
-		this.game.load.image('bg-track', 'assets/images/bg/bg-track.png');
 
 
 		// Game Start 
