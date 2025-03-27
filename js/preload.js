@@ -19,7 +19,6 @@ Preload.prototype = {
 
 		// // buttons 
 		this.game.load.spritesheet('btn_elephant', '/assets/components/btn-aliya.png',313,132);
-		this.game.load.spritesheet('btn_obstacle', '/assets/components/btn-goni.png', 313,132);
 		this.game.load.spritesheet('btn_grease', '/assets/components/btn-grease.png', 313,132);
 		this.game.load.spritesheet('btn_leader_board', '/assets/components/btn-leader.png', 303,152);
 
@@ -46,14 +45,8 @@ Preload.prototype = {
 
 
 		// Game Start 
-		this.game.load.image('gs-bg-1', '/assets/images/bg/race.png');
 		this.game.load.image('gs-bg-2', '/assets/images/bg/elephant.png');
 		this.game.load.image('gs-bg-3', '/assets/images/bg/grease.png');
-
-		// Game 1
-		this.game.load.image('bg-1', 'assets/images/bg/bg-1.png');
-		this.game.load.image('bg-1-1', 'assets/images/bg/bg-1-1.png');
-		this.game.load.spritesheet('imang-goni', '/assets/components/imang-goni.png', 100, 206);
 
 		// Game 2 
 		this.game.load.image('board', 'assets/components/board.png', 193, 71);

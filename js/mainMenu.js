@@ -19,7 +19,7 @@ MainMenu.prototype = {
         }, this);
 
         game.add.image(0, 0, 'menu').scale.setTo(1.02, 1.02);
-        game.add.image(0, 0, 'points-style').scale.setTo(1.02, 1.02);
+        /*game.add.image(0, 0, 'points-style').scale.setTo(1.02, 1.02);*/
 
         var sun = game.add.sprite(this.game.world.width - 300, -20, 'sun');
         sun.animations.add('shine', [0, 1, 2, 3], 2, true);
@@ -30,8 +30,8 @@ MainMenu.prototype = {
         bird.animations.add('crow', [0, 1, 2, 3], 3, true);
         bird.play('crow');
 
-        game.add.image(0, 0, 'menu-fix').scale.setTo(1.02, 1.02);
-        game.add.image(this.game.world.centerX - 150, 70, 'logo').scale.setTo(0.7, 0.7);
+        /*game.add.image(0, 0, 'menu-fix').scale.setTo(1.02, 1.02);
+        game.add.image(this.game.world.centerX - 150, 70, 'logo').scale.setTo(0.7, 0.7);*/
 
         this.showMenu();
         this.addButtons();
@@ -54,11 +54,11 @@ MainMenu.prototype = {
         this.scoreLabel.align = 'center';
         this.game.world.bringToTop(this.scoreLabel);
          
-        this.greetText = this.game.add.text(this.game.world.centerX, this.game.world.height / 2.9, 
+        /*this.greetText = this.game.add.text(this.game.world.centerX, this.game.world.height / 2.9, 
             "සුභ අලුත් අවුරුද්දක් වේවා!", { font: scoreFont, fill: "#000" });
         this.greetText.anchor.setTo(0.5, 0.5);
         this.greetText.align = 'center';
-        this.game.world.bringToTop(this.greetText);
+        this.game.world.bringToTop(this.greetText);*/
 
         // Add game buttons
        // Add game buttons with increased scale and proper spacing
