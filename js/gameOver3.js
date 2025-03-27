@@ -15,24 +15,24 @@ GameOver3.prototype = {
 
 	showScore: function () {
 
-		game.add.button(game.world.centerX - 200, 560, 'btn_home', function () {
+		game.add.button(game.world.centerX - 200, 1340, 'btn_home', function () {
 			this.click.play(); 
 			this.game.state.start('MainMenu');
 		}, this, 1, 0);
-		game.add.button(game.world.centerX + 100, 560, 'btn_play', function () {
+		game.add.button(game.world.centerX + 100, 1340, 'btn_play', function () {
 			this.click.play(); 
 			this.restartGame();
 		}, this, 1, 0);
 
 		var scoreFont = "70px Mali";
 
-		this.scoreLabel = this.game.add.text(830, 420, "0", { font: scoreFont, fill: "#332F26" });
+		this.scoreLabel = this.game.add.text(630, 1040, "0", { font: scoreFont, fill: "#332F26" });
 		this.scoreLabel.anchor.setTo(0.5, 0.5);
 		this.scoreLabel.align = 'left';
 		this.game.world.bringToTop(this.scoreLabel);
 		this.scoreLabel.text = (score);
 
-		this.highScore = this.game.add.text(830, 515, "0", { font: scoreFont, fill: "#332F26" });
+		this.highScore = this.game.add.text(630, 1140, "0", { font: scoreFont, fill: "#332F26" });
 		this.highScore.anchor.setTo(0.5, 0.5);
 		this.highScore.align = 'left';
 		this.game.world.bringToTop(this.highScore);
