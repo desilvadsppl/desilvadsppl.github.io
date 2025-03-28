@@ -65,6 +65,10 @@ Preload.prototype = {
 	},
 
 	create: function () {
+		// Refresh input again after loading completes
 		this.game.state.start("MainMenu");
+		this.game.input.clear();
+		this.game.input.reset();
+		this.game.input.touch.preventDefault = true;
 	}
 }

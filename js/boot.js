@@ -2,36 +2,46 @@ var Boot = function(game) {};
 
 Boot.prototype = {
     preload: function() {
-        // Show loading text
-        var loadingText = this.game.add.text(
+        // 1. Show loading indicator (no external assets needed)
+        this.loadingText = this.game.add.text(
             this.game.world.centerX,
-            this.game.world.centerY - 50,
-            "Loading...",
-            { font: '40px Arial', fill: "#ffffff" }
+            this.game.world.centerY,
+            'Loading...', 
+            {
+                font: '30px Arial',
+                fill: '#ffffff',
+                align: 'center'
+            }
         );
-        loadingText.anchor.setTo(0.5, 0.5);
+        this.loadingText.anchor.set(0.5);
+        
+        // 2. Critical scaling setup
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.pageAlignHorizontally = true;
+        this.scale.pageAlignVertically = true;
+        this.scale.refresh();
     },
 
     create: function() {
-        // Initialize loading animation
-        this.loading = this.game.add.sprite(
-            this.game.world.centerX,
-            this.game.world.centerY,
-            'loading'
-        );
-        this.loading.anchor.setTo(0.5, 0.5);
+        // 3. Force input reset
+        this.game.input.touch.preventDefault = true;
+        this.game.input.maxPointers = 1;
+        this.game.input.addPointer();
         
-        this.loading.animations.add('initiate', 
-            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-            18,
-            true
-        );
-        this.loading.play('initiate');
-
-        // Set up game scaling
-        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        // 4. Double-check device orientation
+        if (!this.game.device.desktop) {
+            this.scale.forceOrientation(true, false); // Force portrait
+            this.scale.enterIncorrectOrientation.add(this.orientationWarning, this);
+        }
         
-        // Start preload state
-        this.game.state.start("Preload");
+        // 5. Start next state with safety delay
+        this.game.time.events.add(500, function() {
+            this.game.state.start('Preload');
+        }, this);
+    },
+    
+    orientationWarning: function() {
+        // Handle landscape mode on phones
+        alert('Please rotate your device to portrait mode');
     }
 };
