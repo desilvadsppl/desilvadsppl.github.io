@@ -1,6 +1,6 @@
-var GameWon = function (game) { };
+var GameWon3 = function (game) { };
 
-GameWon.prototype = {
+GameWon3.prototype = {
 
 	create: function () {
 
@@ -21,7 +21,7 @@ GameWon.prototype = {
 		}, this, 1, 0);
 		game.add.button(game.world.centerX + 100, 1340, 'btn_play', function () {
 			this.click.play(); 
-			this.restartGame();
+			this.restartGame3();
 		}, this, 1, 0);
 
 		var scoreFont = "70px Mali";
@@ -54,9 +54,7 @@ GameWon.prototype = {
 
 	},
 
-	restartGame: function () {
-		this.game.state.start("Game2");
-	},
+
 	restartGame3: function () {
 		this.game.state.start("Game3");
 	}
