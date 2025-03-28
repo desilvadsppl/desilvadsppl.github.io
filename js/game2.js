@@ -6,8 +6,8 @@ var score = 0;
 Game2.prototype = {
     create: function () {
         this.alive = true;
-        this.perc = 1000;
-        this.percx = 140;
+        this.perc = 900;
+        this.percx = 60;
         this.game.stage.backgroundColor = 'ffe8a3';
         this.game.add.image(0, 0, 'bg-aliya');
         tries = 3;
@@ -26,15 +26,15 @@ Game2.prototype = {
         this.progress = game.add.image(0, 0, "timeline");
         this.progress.x = (this.game.world.width - bg_t.width) / 2;
         bg_t.x = (this.game.world.width - bg_t.width) / 2;
-        bg_t.y = 35;
-        this.progress.y = 35;
+        bg_t.y = 1035;
+        this.progress.y = 1035;
 
         this.chalks = this.game.add.group();
         this.chalks.createMultiple(3, 'chalk');
 
-        this.chalks.children[0].reset(this.game.world.centerX - 100, bg_t.position.y + 50);
-        this.chalks.children[1].reset(this.game.world.centerX, bg_t.position.y + 50);
-        this.chalks.children[2].reset(this.game.world.centerX + 100, bg_t.position.y + 50);
+        this.chalks.children[0].reset(this.game.world.centerX - 100, bg_t.position.y - 900);
+        this.chalks.children[1].reset(this.game.world.centerX, bg_t.position.y - 900);
+        this.chalks.children[2].reset(this.game.world.centerX + 100, bg_t.position.y - 900);
 
         // Board 
         this.createBoard();
@@ -48,16 +48,16 @@ Game2.prototype = {
     },
 
     addButtons: function () {
-        game.add.button(20, 0, 'btn_home',
+        game.add.button(20, 1000, 'btn_home',
             () => {
                 this.stopSounds(); 
                 this.click.play(); 
                 this.game.state.start('MainMenu');
             }, this, 1, 2);
 
-        this.mute = game.add.button(20, 100, 'btn_mute', this.soundIt, this, 1, 0);
+        this.mute = game.add.button(20, 1100, 'btn_mute', this.soundIt, this, 1, 0);
         this.mute.visible = false;
-        this.sound = game.add.button(20, 100, 'btn_sound', this.muteIt, this, 1, 0);
+        this.sound = game.add.button(20, 1100, 'btn_sound', this.muteIt, this, 1, 0);
     },
 
     bgms: function () {
@@ -167,7 +167,7 @@ Game2.prototype = {
 
     decrementerScore: function () {
         if (this.alive) {
-            this.perc -= 1;
+            this.perc -= 0.5;
             this.percx += 0.03
             this.progress.width = this.perc;
             this.progress.x = this.percx;
