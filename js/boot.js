@@ -10,9 +10,6 @@ Boot.prototype = {
             { font: '40px Arial', fill: "#ffffff" }
         );
         loadingText.anchor.setTo(0.5, 0.5);
-
-        // Load loading animation
-        this.game.load.spritesheet('loading', 'assets/components/loading.png', 199, 199);
     },
 
     create: function() {
