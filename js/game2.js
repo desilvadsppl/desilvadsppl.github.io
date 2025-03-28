@@ -13,14 +13,12 @@ Game2.prototype = {
         tries = 3;
         score = 0;
         this.scoreDiv = 1;
-        
-        // Sound for the buttons
-        this.click = game.add.audio('click');
-        this.mark = game.add.audio('mark');
-        this.bgm = game.add.audio('bgm');
-        this.switch = game.add.audio('switch');
-        this.whisile = game.add.audio('whisile');
-        this.bgm.volume = 0.5;
+
+        // Ensure scaling is set up correctly for responsive mode
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.pageAlignHorizontally = true;
+        this.scale.pageAlignVertically = true;
+        this.scale.setScreenSize(true);  // Ensure proper scaling
 
         var bg_t = game.add.image(0, 0, "timeline-bg");
         this.progress = game.add.image(0, 0, "timeline");
@@ -108,8 +106,8 @@ Game2.prototype = {
     },
 
     setEyeMark: function (e) {
-        const x = parseFloat(e.input._pointerData[0].x);
-        const y = parseFloat(e.input._pointerData[0].y);
+        const x = e.x * this.game.width / window.innerWidth;
+        const y = e.y * this.game.height / window.innerHeight;
 
         const e_x_1 = (this.board.width / 4.3333);
         const e_x_2 = (this.board.width / 3.5777);
@@ -186,11 +184,33 @@ Game2.prototype = {
         }, 1500);
     },
 
-     gameWon: function () {
+    gameWon: function () {
         this.alive = false;
         this.stopSounds();
         setTimeout(() => {
             this.game.state.start('GameWon');
         }, 1500);
+    }
+};
+
+// Phaser Game Initialization
+window.onload = function() {
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
+        preload: preload,
+        create: create,
+        update: update
+    });
+
+    function preload() {
+        // Add the assets here (e.g., 'bg-aliya', 'board', 'btn_home', etc.)
+    }
+
+    function create() {
+        game.state.add('Game2', Game2);
+        game.state.start('Game2');
+    }
+
+    function update() {
+        // Game loop logic goes here
     }
 };
