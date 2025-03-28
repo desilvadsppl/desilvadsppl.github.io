@@ -103,9 +103,40 @@ MainMenu.prototype = {
         this.sound = game.add.button(10, 175, 'btn_sound', this.muteIt, this, 1, 0);
     },
 
-    exit: function () {
+    exit: function() {
+    // Clear all possible caches and storage
+    try {
+        // 1. Clear web storage
+        localStorage.clear();
+        sessionStorage.clear();
+
+        // 2. Clear Service Worker caches
+        if ('caches' in window) {
+            caches.keys().then(function(cacheNames) {
+                cacheNames.forEach(function(cacheName) {
+                    caches.delete(cacheName);
+                });
+            });
+        }
+
+        // 3. Clear IndexedDB databases
+        if (window.indexedDB && indexedDB.databases) {
+            indexedDB.databases().then(function(databases) {
+                databases.forEach(function(db) {
+                    indexedDB.deleteDatabase(db.name);
+                });
+            });
+        }
+
+        // 4. Force reload with cache bypass
+        window.location.reload(true); // 'true' forces ignoring cache
+
+    } catch (e) {
+        console.error("Cache clearing failed:", e);
+        // Fallback to normal reload if something fails
         window.location.reload();
-    },
+    }
+},
 
     muteIt: function () {
         this.mute.visible = true;
