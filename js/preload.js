@@ -22,8 +22,6 @@ Preload.prototype = {
 		this.game.load.spritesheet('btn_grease', '/assets/components/btn-grease.png', 313,132);
 		this.game.load.spritesheet('btn_leader_board', '/assets/components/btn-leader.png', 303,152);
 
-		this.game.load.spritesheet('sun', '/assets/components/sun.png', 551.2, 552);
-		this.game.load.spritesheet('bird', '/assets/components/bird.png', 241, 250);
 		this.game.load.spritesheet('logo', '/assets/components/logo.png', 360, 360);
 		this.game.load.spritesheet('btn_sound', '/assets/components/sound_100x100.png', 105, 105);
 		this.game.load.spritesheet('btn_mute', '/assets/components/mute100x100.png', 105, 105);
