@@ -3,66 +3,60 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="shortcut icon" href="/assets/components/fav.png" type="image/x-icon">
     <title>Port City Aurudu Game</title>
-    <!--
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Mali:wght@600&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-    </style> -->
 
     <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
         body {
             overflow: hidden;
-
+            background: #000;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
         }
 
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px
-        }
-
-        ::-webkit-scrollbar-button {
-            background: #ccc
-        }
-
-        ::-webkit-scrollbar-track-piece {
-            background: #ccc
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgb(255, 153, 0)
-        }
-
-        .center {
+        #game-container {
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            align-self: center;
-            align-content: center;
-            margin: auto;
+        }
+        
+        canvas {
+            display: block;
+            margin: 0 auto;
+            touch-action: none;
+        }
+
+        /* Hide scrollbars completely */
+        ::-webkit-scrollbar {
+            display: none;
         }
     </style>
-    <!--
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
-        crossorigin="anonymous"></script>-->
-
 </head>
 
-<body class="center">
+<body>
     <div id="game-container"></div>
 
     <!-- Load all scripts first -->
@@ -79,17 +73,61 @@
     <script type="text/javascript" src="js/gameWon.js"></script>
     <script type="text/javascript" src="js/gameWon3.js"></script>
   
-
     <!-- Initialize game after scripts are loaded -->
     <script type="text/javascript">
         (function () {
+            // Detect screen orientation and adjust dimensions
+            function getGameDimensions() {
+                const isPortrait = window.innerHeight > window.innerWidth;
+                return {
+                    width: isPortrait ? 1080 : 1920,
+                    height: isPortrait ? 1920 : 1080
+                };
+            }
+            
+            const dimensions = getGameDimensions();
+            
             game = new Phaser.Game({
-            width: 1080,
-            height: 1920,
-            renderer: Phaser.CANVAS,
-            canvas: document.createElement('canvas', { willReadFrequently: true }),
-            // other config options...
-        });
+                width: dimensions.width,
+                height: dimensions.height,
+                renderer: Phaser.CANVAS,
+                canvas: document.createElement('canvas', { willReadFrequently: true }),
+                canvasStyle: 'display: block;',
+                transparent: false,
+                antialias: false,
+                input: {
+                    touch: {
+                        capture: true
+                    }
+                },
+                scaleMode: Phaser.ScaleManager.SHOW_ALL,
+                parent: 'game-container',
+                state: null,
+                preserveDrawingBuffer: true,
+                enableDebug: false
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (game.scale) {
+                    const newDimensions = getGameDimensions();
+                    game.scale.setGameSize(newDimensions.width, newDimensions.height);
+                    game.scale.refresh();
+                }
+            });
+            
+            // Prevent default touch behavior
+            document.addEventListener('touchstart', preventDefault, { passive: false });
+            document.addEventListener('touchmove', preventDefault, { passive: false });
+            document.addEventListener('touchend', preventDefault, { passive: false });
+            
+            function preventDefault(e) {
+                if (e.target.tagName.toLowerCase() !== 'canvas') return;
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            }
+
             //Add all states
             game.state.add("Boot", Boot);
             game.state.add("Preload", Preload);
@@ -108,5 +146,4 @@
         })();
     </script>
 </body>
-
 </html>

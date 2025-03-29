@@ -107,43 +107,64 @@ Game2.prototype = {
         this.whisile.play();
     },
 
-    setEyeMark: function (e) {
-        const x = parseFloat(e.input._pointerData[0].x);
-        const y = parseFloat(e.input._pointerData[0].y);
+    setEyeMark: function (board, pointer) {
+        // Get the local position of the click within the board sprite
+        const localPosition = {
+            x: pointer.x - board.x,
+            y: pointer.y - board.y
+        };
 
-        const e_x_1 = (this.board.width / 4.3333);
-        const e_x_2 = (this.board.width / 3.5777);
-        const e_y_1 = (this.board.height / 3.5094);
-        const e_y_2 = (this.board.height / 2.8181);
+        // Define the target area (eye area) relative to the board
+        const e_x_1 = (board.width / 4.3333);
+        const e_x_2 = (board.width / 3.5777);
+        const e_y_1 = (board.height / 3.5094);
+        const e_y_2 = (board.height / 2.8181);
 
-        if ((x > e_x_1 && x < e_x_2) && (y > e_y_1 && y < e_y_2) && this.alive) {
+        // Check if click is within target area
+        if ((localPosition.x > e_x_1 && localPosition.x < e_x_2) && 
+            (localPosition.y > e_y_1 && localPosition.y < e_y_2) && this.alive) {
+            // Correct hit
             this.mark.play();
             this.boardShake_y.pause();
             this.boardShake_x.pause();
             this.blinder.play('shrink');
+
+            // Add eye mark at the exact clicked position
+            const eyeMark = this.game.add.sprite(
+                pointer.x - (29 / 2),  // Center the eye mark horizontally
+                pointer.y - (17 / 2),  // Center the eye mark vertically
+                "eye"
+            );
+            eyeMark.anchor.set(0.5);
 
             setTimeout(() => {
                 this.blinder.visible = false;
                 score = this.perc;
                 this.gameWon();
             }, 200);
-
-            this.add.tileSprite(e.position.x + e_x_1 + 5, e.position.y + e_y_1 + 10, 29, 17, "eye");
         }
         else {
+            // Missed the target
             if (this.alive) {
                 this.mark.play();
                 this.boardShake_y.resume();
                 this.boardShake_x.resume();
-                cross = this.game.add.sprite((e.position.x + x) - 15, (e.position.y + y) - 15, 'cross');
+                
+                // Add cross at the clicked position
+                const cross = this.game.add.sprite(
+                    pointer.x - 15, 
+                    pointer.y - 15, 
+                    'cross'
+                );
                 cross.scale.setTo(2);
                 cross.animations.add('initiate', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, false);
                 cross.play('initiate');
             }
+            
             tries--;
-
-            if (!(tries < 0) && this.alive)
-                this.chalks.children[tries].alpha = .40;
+            if (!(tries < 0) && this.alive) {
+                this.chalks.children[tries].alpha = 0.40;
+            }
 
             if (tries == 0) {
                 this.alive = false;
@@ -186,7 +207,7 @@ Game2.prototype = {
         }, 1500);
     },
 
-     gameWon: function () {
+    gameWon: function () {
         this.alive = false;
         this.stopSounds();
         setTimeout(() => {
