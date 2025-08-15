@@ -1,0 +1,175 @@
+/* ===== Base layout ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; /* Always fill viewport */
+  background: #111 url('../images/background.jpg') no-repeat center center;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+
+  /* Center slot machine */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;   /* prevent scrollbars */
+  position: fixed;    /* lock interface */
+  top: 0;
+  left: 0;
+}
+
+
+/* Scale the whole interface dynamically */
+.slot-container {
+  position: relative;
+  text-align: center;
+  transform: scale(calc(1080 / 700)) translateY(185px);
+  transform-origin: center center; /* scale from center */
+}
+
+.slot-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* ===== Red frame around reels ===== */
+.reels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  background: red;   /* red frame */
+  border-radius: 18px;
+  padding: 35px;         /* frame thickness */
+  overflow: visible;
+
+  --bulb-gap: 45px; /* space between bulbs */
+  --bulb-on: radial-gradient(circle, #ffd86b 6px, #b9861a 8px, transparent 9px);
+}
+
+/* No bulbs by default */
+.reels::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Yellow bulbs only when .flash is added */
+.reels.flash::before {
+  background-image:
+    var(--bulb-on), /* top */
+    var(--bulb-on); /* bottom */
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: var(--bulb-gap) var(--bulb-gap);
+  background-position:
+    top center,
+    bottom center,
+    left center,
+    right center;
+  animation: bulbs-flash 0.6s infinite alternate;
+}
+
+/* Flash animation */
+@keyframes bulbs-flash {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+
+
+/* ===== Reels (the windows) ===== */
+.reel {
+  width: 120px;      /* narrower than height for a tall rectangle */
+  height: 220px;     /* symbol height should match your images */
+  margin: 0 10px;
+  border: 4px solid gold;
+  border-radius: 8px;
+  background: #000;
+  overflow: hidden;   /* important if you switch to rolling strips */
+  position: relative;
+}
+
+/* If you’re using rolling strips, keep these; otherwise safe to leave */
+.reel-strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-out;
+}
+.reel-strip img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+}
+
+/* ===== Spin button ===== */
+#spinBtn {
+  font-size: 2rem;
+  padding: 40px;   /* equal padding for a circle */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease, background-color 0.3s ease;
+}
+#spinBtn:active {
+  transform: scale(0.95);
+}
+#spinBtn:hover {
+  background-color: #cc0000;
+}
+#spinBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#message {
+  font-size: 2rem;
+  margin-top: 5px;
+  font-weight: bold;
+  min-height: 2.5em;           /* reserve space so layout doesn’t jump */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Win effects ===== */
+/* 1) Border flash on each reel (apply .flash to .reel elements) */
+.flash {
+    animation: 
+        flash-border 0.3s alternate infinite,
+        flash-bulbs 0.5s alternate infinite;
+}
+
+@keyframes flash-border {
+  0%   { border-color: red; filter: brightness(1); }
+  100% { border-color: red;  filter: brightness(1.8); }
+}
+
+@keyframes flash-bulbs {
+    0% { box-shadow: 0 0 10px red; background-color: #f00; }
+    100% { box-shadow: 0 0 10px red; background-color: #f00; }
+}
+
+#playCountDisplay {
+    margin-top: 250px;        /* light space above */
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffd86b;
+    text-shadow: 1px 1px 3px #b9861a;
+    font-family: 'Arial', sans-serif;
+}
+

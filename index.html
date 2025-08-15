@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanté Slot Machine</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="slot-container">
+
+    <!--    <h1 class="game-title">🎰 Amanté Slot Machine 🎰</h1>   -->
+
+        <div class="reels">
+            <img id="reel1" class="reel" src="images/amante.png" alt="Reel 1">
+            <img id="reel2" class="reel" src="images/icon1.png" alt="Reel 2">
+            <img id="reel3" class="reel" src="images/icon2.png" alt="Reel 3">
+        </div>
+   
+        <button id="spinBtn">SPIN</button>
+        <p id="message"></p>
+        <p id="playCountDisplay">Plays: <span id="playCount">0</span></p>
+    </div>
+
+    <audio id="spinSound" src="sounds/spin.mp3" preload="auto"></audio>
+    <audio id="winSound" src="sounds/win.mp3" preload="auto"></audio>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
