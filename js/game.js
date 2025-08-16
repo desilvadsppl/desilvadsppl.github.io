@@ -2,7 +2,7 @@ const symbols = ["amante", "icon1", "icon2", "icon3"];
 let reels = ["", "", ""];
 
 // Win rate configuration
-const WIN_RATE = 0.3;
+const WIN_RATE = 0.2;
 
 const spinBtn = document.getElementById("spinBtn");
 const message = document.getElementById("message");

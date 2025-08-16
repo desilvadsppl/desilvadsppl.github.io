@@ -26,7 +26,7 @@ html, body {
 .slot-container {
   position: relative;
   text-align: center;
-  transform: scale(calc(1080 / 700)) translateY(185px);
+  transform: scale(calc(800 / 700)) translateY(140px);
   transform-origin: center center; /* scale from center */
 }
 
@@ -45,10 +45,19 @@ html, body {
   align-items: center;
   margin-bottom: 20px;
   position: relative;
-  background: red;   /* red frame */
-  border-radius: 18px;
-  padding: 35px;         /* frame thickness */
+
+  /* Red glossy background */
+  background: radial-gradient(circle at 30% 30%, #ff1a1a, #990000);
+  border-radius: 22px;
+  padding: 40px;
   overflow: visible;
+
+  /* Golden outer frame */
+  border: 8px solid #ffd700;
+  box-shadow: 
+    0 0 25px rgba(255, 215, 0, 0),   /* golden glow */
+    inset 0 4px 10px rgba(255, 255, 255, 0.3),  /* glossy top */
+    inset 0 -6px 12px rgba(0, 0, 0, 0.6); /* depth */
 
   --bulb-gap: 45px; /* space between bulbs */
   --bulb-on: radial-gradient(circle, #ffd86b 6px, #b9861a 8px, transparent 9px);
@@ -111,30 +120,54 @@ html, body {
   object-fit: contain;
 }
 
-/* ===== Spin button ===== */
+/* ===== Spin button (luxury casino style) ===== */
 #spinBtn {
   font-size: 2rem;
-  padding: 40px;   /* equal padding for a circle */
+  padding: 40px;
   margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: red;
-  color: white;
-  border: none;
+  margin-bottom: 5px;
+  color: gold;
+  background: radial-gradient(circle at 30% 30%, #ff1a1a, #b30000);
+  border: 6px solid #ffd700;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.1s ease, background-color 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  /* 3D & Glow effects */
+  box-shadow: 
+    0 0 15px rgba(255, 215, 0, 0.7),  /* outer golden glow */
+    inset 0 4px 10px rgba(255, 255, 255, 0.4), /* glossy top */
+    inset 0 -4px 10px rgba(0, 0, 0, 0.5); /* shading bottom */
+
+  transition: transform 0.15s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
+
+#spinBtn:hover {
+  background: radial-gradient(circle at 30% 30%, #ff3333, #990000);
+  box-shadow: 
+    0 0 25px rgba(255, 215, 0, 0.9),
+    inset 0 6px 14px rgba(255, 255, 255, 0.5),
+    inset 0 -6px 14px rgba(0, 0, 0, 0.6);
+}
+
 #spinBtn:active {
   transform: scale(0.95);
+  box-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.6),
+    inset 0 2px 6px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.7);
 }
-#spinBtn:hover {
-  background-color: #cc0000;
-}
+
 #spinBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  background: #660000;
+  color: #999;
+  border-color: #555;
+  box-shadow: none;
 }
+
 
 #message {
   font-size: 2rem;
@@ -165,8 +198,8 @@ html, body {
 }
 
 #playCountDisplay {
-    margin-top: 250px;        /* light space above */
-    font-size: 40px;
+    margin-top: 240px;        /* light space above */
+    font-size: 30px;
     font-weight: bold;
     color: #ffd86b;
     text-shadow: 1px 1px 3px #b9861a;
