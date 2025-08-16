@@ -1,7 +1,7 @@
 const symbols = ["amante", "icon1", "icon2", "icon3"];
 let reels = ["", "", ""];
 
-// 🎯 Easy win ratio control
+// Win rate configuration
 const WIN_RATE = 0.2;
 
 const spinBtn = document.getElementById("spinBtn");
@@ -14,43 +14,72 @@ spinBtn.addEventListener("click", spinReels);
 function spinReels() {
     spinBtn.disabled = true;
     message.innerText = "";
-
     spinSound.play();
 
-    let positions = [0, 0, 0]; // index in symbols array
-    let intervals = [];
+    // Determine win or lose
+    const isWin = Math.random() < WIN_RATE;
+    const finalSymbols = isWin
+        ? ["amante", "amante", "amante"]
+        : Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
 
-    // Start each reel spinning
+    // Start each reel spin
     for (let i = 0; i < 3; i++) {
-        intervals[i] = setInterval(() => {
-            positions[i] = (positions[i] + 1) % symbols.length;
-            document.getElementById(`reel${i + 1}`).src = `images/${symbols[positions[i]]}.png`;
-        }, 100 + i * 50); // each reel a bit slower for realism
+        spinSingleReel(i, finalSymbols[i], 2000 + i * 1000); // delay each reel
+    }
+}
+
+function spinSingleReel(index, finalSymbol, duration) {
+    const reel = document.getElementById(`reel${index + 1}`);
+    const strip = reel.querySelector(".reel-strip");
+
+    if (!strip) {
+        console.error(`.reel-strip not found in reel${index + 1}`);
+        return;
     }
 
-    // Decide win or lose now (so we know the stop target)
-    let isWin = Math.random() < WIN_RATE;
-    let finalSymbols = [];
+    // Reset strip before starting spin
+    strip.style.transition = "none";
+    strip.style.transform = "translateY(0)";
+    strip.innerHTML = "";
 
-    if (isWin) {
-        finalSymbols = ["amante", "amante", "amante"];
-    } else {
-        for (let i = 0; i < 3; i++) {
-            finalSymbols[i] = symbols[Math.floor(Math.random() * symbols.length)];
-        }
+    // Force reflow (important for restart)
+    void strip.offsetWidth;
+
+    // Build spin strip
+    const spinCount = 20 + index * 5;
+    for (let i = 0; i < spinCount; i++) {
+        const img = document.createElement("img");
+        const sym = symbols[Math.floor(Math.random() * symbols.length)];
+        img.src = `images/${sym}.png`;
+        strip.appendChild(img);
     }
 
-    // Stop reels one by one with delay
-    setTimeout(() => stopReel(0, finalSymbols[0]), 2000);
-    setTimeout(() => stopReel(1, finalSymbols[1]), 3000);
-    setTimeout(() => stopReel(2, finalSymbols[2], checkWin), 4000);
+    // Add final symbol at end
+    const finalImg = document.createElement("img");
+    finalImg.src = `images/${finalSymbol}.png`;
+    strip.appendChild(finalImg);
 
-    function stopReel(reelIndex, symbol, callback) {
-        clearInterval(intervals[reelIndex]);
-        reels[reelIndex] = symbol;
-        document.getElementById(`reel${reelIndex + 1}`).src = `images/${symbol}.png`;
-        if (callback) callback();
-    }
+    // Animate strip moving up
+    const totalHeight = 220 * (spinCount + 1); // symbol height × total
+    strip.style.transition = `transform ${duration}ms ease-out`;
+    strip.style.transform = `translateY(-${totalHeight}px)`;
+
+    // After animation ends
+    setTimeout(() => {
+        // Reset position and show only final image
+        strip.style.transition = "none";
+        strip.style.transform = "translateY(0)";
+        strip.innerHTML = "";
+
+        const img = document.createElement("img");
+        img.src = `images/${finalSymbol}.png`;
+        strip.appendChild(img);
+
+        reels[index] = finalSymbol;
+
+        // Check win on last reel
+        if (index === 2) checkWin();
+    }, duration + 100);
 }
 
 function checkWin() {
@@ -65,33 +94,27 @@ function checkWin() {
 }
 
 function flashWin() {
-    // Add flash to reels (frame + bulbs)
     const reelsContainer = document.querySelector(".reels");
     if (reelsContainer) reelsContainer.classList.add("flash");
 
-    // Add flash to individual reels (borders)
     document.querySelectorAll(".reel").forEach(reel => reel.classList.add("flash"));
 
-    // Remove flash after 3 seconds
     setTimeout(() => {
         if (reelsContainer) reelsContainer.classList.remove("flash");
         document.querySelectorAll(".reel").forEach(reel => reel.classList.remove("flash"));
     }, 3000);
 }
 
-// Load saved count (local for this browser)
+// Play counter using localStorage
 let playCount = parseInt(localStorage.getItem("playCount")) || 0;
 
-// Function to update counter in the UI
 function updatePlayCountDisplay() {
     document.getElementById("playCountDisplay").textContent = `Plays: ${playCount}`;
 }
 
-// Run once on page load
 updatePlayCountDisplay();
 
-// When spin button is clicked
-document.getElementById("spinBtn").addEventListener("click", () => {
+spinBtn.addEventListener("click", () => {
     playCount++;
     localStorage.setItem("playCount", playCount);
     updatePlayCountDisplay();
