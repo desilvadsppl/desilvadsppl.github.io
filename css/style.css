@@ -26,7 +26,7 @@ html, body {
 .slot-container {
   position: relative;
   text-align: center;
-  transform: scale(calc(800 / 1000)) translateY(170px);
+  transform: scale(calc(800 / 1000)) translateY(140px);
   transform-origin: center center; /* scale from center */
 }
 
