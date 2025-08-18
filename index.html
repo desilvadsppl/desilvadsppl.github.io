@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amanté Slot Machine</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+    function openFullscreen() {
+      let elem = document.documentElement; // fullscreen whole page
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { // Safari/iOS
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // old MS Edge
+        elem.msRequestFullscreen();
+      }
+    }
+  </script>
 </head>
 <body>
     <div class="slot-container">
@@ -20,6 +32,7 @@
         <button id="spinBtn">SPIN</button>
         <p id="message"></p>
         <p id="playCountDisplay">Plays: <span id="playCount">0</span></p>
+        <button onclick="openFullscreen()">Go Fullscreen</button>
     </div>
 
     <audio id="spinSound" src="sounds/spin.mp3" preload="auto"></audio>
